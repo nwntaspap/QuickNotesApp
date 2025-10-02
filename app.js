@@ -104,9 +104,27 @@ function handleFormSubmit(event) {
 
   const newNote = getFormData();
   saveNoteToArray(newNote);
+  saveNotes();
   renderNotes();
   closeNoteDialog();
 }
 
+// Save to LocalStorage
+function saveNotes() {
+  localStorage.setItem("Notes", JSON.stringify(notes));
+}
+
+// Load from LocalStorage
+function loadNotes() {
+  const jsonStr = localStorage.getItem("Notes");
+  if (jsonStr) {
+    notes = JSON.parse(jsonStr);
+    renderNotes();
+  }
+}
+
 themeToggleBtn.addEventListener("click", themeToggle);
 dialogForm.addEventListener("submit", handleFormSubmit);
+
+// Load when page starts
+document.addEventListener("DOMContentLoaded", loadNotes);
