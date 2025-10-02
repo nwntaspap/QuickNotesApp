@@ -68,7 +68,7 @@ function createNoteElement(note) {
               />
             </svg>
           </button>
-          <button class="delete-btn">
+          <button class="delete-btn" onclick="deleteNote(${note.id})">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               height="20px"
@@ -121,6 +121,13 @@ function loadNotes() {
     notes = JSON.parse(jsonStr);
     renderNotes();
   }
+}
+
+// Delete Node with ID
+function deleteNote(id) {
+  notes = notes.filter((note) => note.id !== id);
+  saveNotes();
+  renderNotes();
 }
 
 themeToggleBtn.addEventListener("click", themeToggle);
