@@ -5,6 +5,8 @@ const dialogForm = document.getElementById("noteForm");
 const notesContainer = document.getElementById("notesContainer");
 
 let notes = [];
+// Track which note is being edited
+let editingNoteId = null;
 
 // Toggle Dark/Light Mode
 function themeToggle() {
@@ -21,24 +23,11 @@ function openNoteDialog() {
   dialogModal.showModal();
 }
 
-// Close Dialog Modal, Reset Form
+// Close Dialog Modal, Reset Form, reset editing state
 function closeNoteDialog() {
   dialogForm.reset();
+  editingNoteId = null;
   dialogModal.close();
-}
-
-// Get form values and create note object
-function getFormData() {
-  const title = document.getElementById("noteTitle").value;
-  const content = document.getElementById("noteContent").value;
-
-  const noteObj = {
-    id: Date.now(),
-    title: title,
-    content: content,
-  };
-
-  return noteObj;
 }
 
 // Save note to array
@@ -55,7 +44,7 @@ function createNoteElement(note) {
      <div class="note-title">${note.title}</div>
         <div class="note-content">${note.content}</div>
         <div class="note-actions">
-          <button class="edit-btn">
+          <button class="edit-btn" onclick="editNote(${note.id})">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               height="20px"
@@ -102,8 +91,28 @@ function renderNotes() {
 function handleFormSubmit(event) {
   event.preventDefault();
 
-  const newNote = getFormData();
-  saveNoteToArray(newNote);
+  const title = document.getElementById("noteTitle").value;
+  const content = document.getElementById("noteContent").value;
+
+  if (editingNoteId) {
+    // Editing existing note
+    const note = notes.find((n) => n.id === editingNoteId);
+    if (note) {
+      note.title = title;
+      note.content = content;
+    }
+    // reset
+    editingNoteId = null;
+  } else {
+    // Creating new note
+    const newNote = {
+      id: Date.now(),
+      title: title,
+      content: content,
+    };
+    saveNoteToArray(newNote);
+  }
+
   saveNotes();
   renderNotes();
   closeNoteDialog();
@@ -128,6 +137,21 @@ function deleteNote(id) {
   notes = notes.filter((note) => note.id !== id);
   saveNotes();
   renderNotes();
+}
+
+// Eidt Note with ID
+function editNote(id) {
+  const note = notes.find((note) => note.id === id);
+  if (!note) return;
+
+  // Fill dialog with existing values
+  document.getElementById("noteTitle").value = note.title;
+  document.getElementById("noteContent").value = note.content;
+
+  // mark note being edited
+  editingNoteId = id;
+
+  openNoteDialog();
 }
 
 themeToggleBtn.addEventListener("click", themeToggle);
