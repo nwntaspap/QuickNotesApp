@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quick Notes</title>
+    <link rel="icon" type="image/png" href="notes-32.png" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <h1>Quick Notes</h1>
+      <div>
+        <button class="add-note-btn" onclick="openNoteDialog()">
+          + Add Note
+        </button>
+        <button id="themeToggleBtn" class="theme-toggle-btn">🌙</button>
+      </div>
+    </header>
+
+    <main id="notesContainer" class="notes-grid">
+      <div class="note-card">
+        <div class="note-title">Supermarket</div>
+        <div class="note-content">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis nulla
+          repellendus dolore dolorem, quod perferendis molestiae sequi
+          repudiandae, quos, corporis ratione iure magnam autem earum assumenda!
+          Iusto, corrupti deserunt! Quae?
+        </div>
+        <div class="note-actions">
+          <button class="edit-btn">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="20px"
+              viewBox="0 -960 960 960"
+              width="20px"
+              fill="#191b23"
+            >
+              <path
+                d="M184-184v-83.77l497.23-498.77q5.15-5.48 11.07-7.47 5.93-1.99 11.99-1.99 6.06 0 11.62 1.54 5.55 1.54 11.94 7.15l38.69 37.93q5.61 6.38 7.54 12 1.92 5.63 1.92 12.25 0 6.13-2.24 12.06-2.24 5.92-7.22 11.07L267.77-184H184Zm505.15-466.46L744-704.54 704.54-744l-54.08 54.85 38.69 38.69Z"
+              />
+            </svg>
+          </button>
+          <button class="delete-btn">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="20px"
+              viewBox="0 -960 960 960"
+              width="20px"
+              fill="#191b23"
+            >
+              <path
+                d="M291-267.69 267.69-291l189-189-189-189L291-692.31l189 189 189-189L692.31-669l-189 189 189 189L669-267.69l-189-189-189 189Z"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+      <div class="note-card">
+        <div class="note-title">Groceries</div>
+        <div class="note-content">
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Distinctio
+          aperiam temporibus dolores a nostrum omnis nihil, commodi, sequi, quia
+          assumenda vero natus eligendi in provident inventore dicta itaque
+          delectus pariatur.
+        </div>
+        <div class="note-actions">
+          <button class="edit-btn">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="20px"
+              viewBox="0 -960 960 960"
+              width="20px"
+              fill="#191b23"
+            >
+              <path
+                d="M184-184v-83.77l497.23-498.77q5.15-5.48 11.07-7.47 5.93-1.99 11.99-1.99 6.06 0 11.62 1.54 5.55 1.54 11.94 7.15l38.69 37.93q5.61 6.38 7.54 12 1.92 5.63 1.92 12.25 0 6.13-2.24 12.06-2.24 5.92-7.22 11.07L267.77-184H184Zm505.15-466.46L744-704.54 704.54-744l-54.08 54.85 38.69 38.69Z"
+              />
+            </svg>
+          </button>
+          <button class="delete-btn">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="20px"
+              viewBox="0 -960 960 960"
+              width="20px"
+              fill="#191b23"
+            >
+              <path
+                d="M291-267.69 267.69-291l189-189-189-189L291-692.31l189 189 189-189L692.31-669l-189 189 189 189L669-267.69l-189-189-189 189Z"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </main>
+
+    <dialog id="noteDialog">
+      <div class="dialog-content">
+        <div class="dialog-header">
+          <h2 id="dialogTitle" class="dialog-title">Edit Note</h2>
+          <button class="close-btn" onclick="closeNoteDialog()">x</button>
+        </div>
+
+        <form id="noteForm">
+          <div class="form-group">
+            <label for="noteTitle" class="form-label">Title</label>
+            <input
+              type="text"
+              id="noteTitle"
+              class="form-input"
+              placeholder="Enter note title..."
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="noteContent" class="form-label">Content</label>
+            <textarea
+              id="noteContent"
+              class="form-textarea"
+              placeholder="write your note here..."
+              required
+            ></textarea>
+          </div>
+
+          <div class="dialog-actions">
+            <button
+              type="button"
+              class="cancel-btn"
+              onclick="closeNoteDialog()"
+            >
+              Cancel
+            </button>
+            <button type="submit" class="save-btn">Save Note</button>
+          </div>
+        </form>
+      </div>
+    </dialog>
+    <!-- <button onclick="noteDialog.showModal()">Open Dialog</button> -->
+  </body>
+</html>
