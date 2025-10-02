@@ -94,6 +94,11 @@ function handleFormSubmit(event) {
   const title = document.getElementById("noteTitle").value;
   const content = document.getElementById("noteContent").value;
 
+  if (!title.trim() || !content.trim()) {
+    alert("Please enter valid note content.");
+    return;
+  }
+
   if (editingNoteId) {
     // Editing existing note
     const note = notes.find((n) => n.id === editingNoteId);
@@ -118,20 +123,6 @@ function handleFormSubmit(event) {
   closeNoteDialog();
 }
 
-// Save to LocalStorage
-function saveNotes() {
-  localStorage.setItem("Notes", JSON.stringify(notes));
-}
-
-// Load from LocalStorage
-function loadNotes() {
-  const jsonStr = localStorage.getItem("Notes");
-  if (jsonStr) {
-    notes = JSON.parse(jsonStr);
-    renderNotes();
-  }
-}
-
 // Delete Node with ID
 function deleteNote(id) {
   notes = notes.filter((note) => note.id !== id);
@@ -139,7 +130,7 @@ function deleteNote(id) {
   renderNotes();
 }
 
-// Eidt Note with ID
+// Edit Note with ID
 function editNote(id) {
   const note = notes.find((note) => note.id === id);
   if (!note) return;
@@ -152,6 +143,20 @@ function editNote(id) {
   editingNoteId = id;
 
   openNoteDialog();
+}
+
+// Save to LocalStorage
+function saveNotes() {
+  localStorage.setItem("Notes", JSON.stringify(notes));
+}
+
+// Load from LocalStorage
+function loadNotes() {
+  const jsonStr = localStorage.getItem("Notes");
+  if (jsonStr) {
+    notes = JSON.parse(jsonStr);
+    renderNotes();
+  }
 }
 
 themeToggleBtn.addEventListener("click", themeToggle);
