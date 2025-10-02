@@ -272,7 +272,7 @@ body.dark-theme .close-btn {
   background: #6a6ffa;
 }
 
-/* .empty-state {
+.empty-state {
   text-align: center;
   padding: 4rem 2rem;
   color: var(--secondary-text-color);
@@ -287,7 +287,8 @@ body.dark-theme .close-btn {
 .empty-state p {
   font-size: 1rem;
   margin-bottom: 2rem;
-} */
+}
+
 /*----- Media Queries -----*/
 @media (max-width: 1100px) {
   .add-note-btn,

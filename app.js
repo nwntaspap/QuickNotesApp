@@ -78,9 +78,18 @@ function createNoteElement(note) {
 
 // Render all notes to the DOM
 function renderNotes() {
+  const emptyState = document.getElementById("emptyState");
+
   // Clear existing
   notesContainer.innerHTML = "";
 
+  if (notes.length === 0) {
+    emptyState.style.display = "block";
+    return;
+  }
+
+  // remove empty state if we have notes
+  emptyState.style.display = "none";
   notes.forEach((note) => {
     const noteElement = createNoteElement(note);
     notesContainer.append(noteElement);
