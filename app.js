@@ -16,4 +16,15 @@ function themeToggle() {
     : (themeToggleBtn.textContent = "🌙");
 }
 
+// Open Dialog Modal
+function openNoteDialog() {
+  dialogModal.showModal();
+}
+
+// Close Dialog Modal, Reset Form
+function closeNoteDialog() {
+  dialogForm.reset();
+  dialogModal.close();
+}
+
 themeToggleBtn.addEventListener("click", themeToggle);
